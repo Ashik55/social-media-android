@@ -1,5 +1,9 @@
 package com.meta.socialmedia.data
 
+import kotlinx.android.parcel.Parcelize
+import android.os.Parcelable
+
+@Parcelize
 data class Post(
     val id: Int,
     val type: String?,
@@ -8,5 +12,5 @@ data class Post(
     val imageURL: String?,
     val videoURL: String?,
     val user: User?
-)
+): Parcelable
 

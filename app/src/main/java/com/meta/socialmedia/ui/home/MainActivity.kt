@@ -1,5 +1,6 @@
 package com.meta.socialmedia.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.meta.socialmedia.R
 import com.meta.socialmedia.data.Post
 import com.meta.socialmedia.data.User
+import com.meta.socialmedia.ui.post_details.PostDetailsActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
+
 
         val list = List(50) { index ->
             Post(
@@ -43,8 +46,13 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         }
-        recyclerView.adapter = PostAdapter(list) {
-            Toast.makeText(this, "Item clicked", Toast.LENGTH_LONG).show()
+        recyclerView.adapter = PostAdapter(list) { post ->
+
+            val intent = Intent(this, PostDetailsActivity::class.java)
+            intent.putExtra("item", post)
+            startActivity(intent)
+
+
         }
         recyclerView.addItemDecoration(ItemSpacingDecoration(horizontal = 4, vertical = 16))
         recyclerView.setPadding(0, 0, 0, 80)
